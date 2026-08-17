@@ -1,75 +1,131 @@
 <!doctype html>
 <html lang="th">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#132b50" />
-  <meta name="description" content="Professional Salesperson Profile Assessment System — ระบบประเมินนักขายมืออาชีพ" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#132b50">
+  <meta name="description" content="Professional Salesperson Profile Assessment System — ระบบประเมินนักขายมืออาชีพ">
   <title>Professional Salesperson Profile Assessment System</title>
-  <link rel="preconnect" href="https://script.google.com" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="app-shell">
     <header class="topbar">
-      <div class="brand" aria-label="Professional Salesperson Profile Assessment System">
-        <div class="brand-mark" aria-hidden="true">SP</div>
+      <a class="brand" href="./" aria-label="หน้าหลัก">
+        <div class="brand-mark">SP</div>
         <div class="brand-copy">
           <strong>Professional Salesperson Profile Assessment System</strong>
           <span>ระบบประเมินนักขายมืออาชีพ</span>
         </div>
-      </div>
-
+      </a>
       <div class="topbar-actions">
-        <button class="icon-button" id="reloadButton" type="button" title="โหลดระบบใหม่" aria-label="โหลดระบบใหม่">
-          <span aria-hidden="true">↻</span>
-        </button>
-        <a
-          class="open-button"
-          id="openSystemButton"
-          href="https://script.google.com/macros/s/AKfycbw1vKFcrAEHBX7CVpYdDxtAkvc1SYB0WHivhOpC7RyIKk56TyhPRbw7nzLlLbGAdMVGQg/exec"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          เปิดระบบเต็มหน้าจอ
-        </a>
+        <span id="apiStatus" class="status-pill">กำลังเชื่อมต่อ...</span>
+        <button id="teacherButton" class="ghost-button" type="button">สำหรับครู</button>
       </div>
     </header>
 
-    <main class="workspace">
-      <section class="system-frame" aria-label="ระบบประเมินนักขายมืออาชีพ">
-        <div class="loading" id="loadingState" role="status" aria-live="polite">
-          <div class="spinner" aria-hidden="true"></div>
-          <div>
-            <strong>กำลังเปิดระบบประเมิน</strong>
-            <p>กรุณารอสักครู่ ระบบกำลังเชื่อมต่อกับฐานข้อมูล</p>
+    <main class="page">
+      <section id="assessmentView">
+        <section class="hero">
+          <div class="hero-copy">
+            <h1>ค้นหาจุดแข็ง<br>ในแบบของนักขายมืออาชีพ</h1>
+            <p>แบบประเมิน 30 ข้อ ครอบคลุมคุณลักษณะสำคัญ 10 ด้าน พร้อมแสดงจุดเด่นและแนวโน้มรูปแบบนักขายของคุณ</p>
           </div>
-        </div>
+          <div class="hero-stat">
+            <b>30</b><span>ข้อคำถาม</span>
+            <b>10</b><span>ด้านที่ประเมิน</span>
+          </div>
+        </section>
 
-        <iframe
-          id="assessmentFrame"
-          title="Professional Salesperson Profile Assessment System"
-          src="https://script.google.com/macros/s/AKfycbw1vKFcrAEHBX7CVpYdDxtAkvc1SYB0WHivhOpC7RyIKk56TyhPRbw7nzLlLbGAdMVGQg/exec"
-          loading="eager"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allow="clipboard-read; clipboard-write"
-        ></iframe>
+        <section class="card student-card">
+          <div class="section-head">
+            <div>
+              <h2>ข้อมูลนักเรียน</h2>
+              <p>ค้นหาด้วยรหัสนักเรียน หรือชื่อ-นามสกุล</p>
+            </div>
+            <span class="step-badge">ขั้นตอน 1</span>
+          </div>
+
+          <div class="search-wrap">
+            <input id="studentSearch" type="search" autocomplete="off" placeholder="พิมพ์อย่างน้อย 2 ตัวอักษร เช่น รหัสนักเรียน หรือชื่อ">
+            <div id="studentResults" class="student-results hidden"></div>
+          </div>
+
+          <div id="selectedStudent" class="selected-student empty">
+            <div>
+              <small>นักเรียนที่เลือก</small>
+              <strong id="selectedStudentName">ยังไม่ได้เลือกนักเรียน</strong>
+              <span id="selectedStudentMeta">กรุณาค้นหาและเลือกรายชื่อก่อนทำแบบประเมิน</span>
+            </div>
+            <button id="clearStudentButton" class="text-button hidden" type="button">เปลี่ยนคน</button>
+          </div>
+        </section>
+
+        <section class="card questions-card">
+          <div class="section-head">
+            <div>
+              <h2>แบบประเมินตนเอง</h2>
+              <p>เลือกคำตอบที่ตรงกับตัวคุณมากที่สุด ไม่มีคำตอบถูกหรือผิด</p>
+            </div>
+            <span class="step-badge">ขั้นตอน 2</span>
+          </div>
+
+          <div class="scale-legend">
+            <span>1 = ไม่ตรงกับฉันเลย</span>
+            <span>3 = ปานกลาง / ไม่แน่ใจ</span>
+            <span>5 = ตรงกับฉันมากที่สุด</span>
+          </div>
+
+          <div class="progress-sticky">
+            <div class="progress-meta">
+              <b>ความคืบหน้า</b>
+              <span id="progressText">0 / 30 ข้อ</span>
+            </div>
+            <div class="progress-track"><span id="progressBar"></span></div>
+          </div>
+
+          <div id="questions" class="questions-list">
+            <div class="loading-block"><span class="spinner"></span>กำลังโหลดคำถาม...</div>
+          </div>
+
+          <div class="submit-zone">
+            <div>
+              <b>ตอบครบแล้วหรือยัง?</b>
+              <span id="submitHint">กรุณาตอบให้ครบทั้ง 30 ข้อ</span>
+            </div>
+            <button id="submitButton" class="primary-button" type="button" disabled>ส่งคำตอบและดูผล</button>
+          </div>
+        </section>
+
+        <p class="disclaimer">แบบประเมินนี้ใช้เพื่อการเรียนรู้และพัฒนาตนเอง ไม่ใช่เครื่องมือวินิจฉัยทางจิตวิทยาหรือทางคลินิก</p>
       </section>
+
+      <section id="resultView" class="hidden"></section>
+      <section id="dashboardView" class="hidden"></section>
     </main>
 
     <footer class="footer">
-      <span>แบบประเมินนี้ใช้เพื่อการเรียนรู้และพัฒนาตนเอง ไม่ใช่การวินิจฉัยทางจิตวิทยาหรือทางคลินิก</span>
-      <span class="connection"><i aria-hidden="true"></i> Google Apps Script</span>
+      <span>Professional Salesperson Profile Assessment System</span>
+      <span>Powered by Google Sheets &amp; Apps Script</span>
     </footer>
   </div>
 
-  <noscript>
-    <div class="noscript">
-      กรุณาเปิดใช้งาน JavaScript หรือ
-      <a href="https://script.google.com/macros/s/AKfycbw1vKFcrAEHBX7CVpYdDxtAkvc1SYB0WHivhOpC7RyIKk56TyhPRbw7nzLlLbGAdMVGQg/exec">เปิดระบบประเมินโดยตรง</a>
-    </div>
-  </noscript>
+  <dialog id="teacherDialog">
+    <form method="dialog" class="dialog-card" onsubmit="return false;">
+      <button id="closeTeacherDialog" class="dialog-close" type="button" aria-label="ปิด">×</button>
+      <h2>Dashboard สำหรับครู</h2>
+      <p>กรอกรหัสผู้ดูแลเพื่อดูภาพรวมผลการประเมิน</p>
+      <label>รหัสผู้ดูแล
+        <input id="teacherPin" type="password" inputmode="numeric" placeholder="PIN">
+      </label>
+      <label>กรองระดับชั้น (ไม่บังคับ)
+        <input id="classFilter" type="text" placeholder="เช่น ม.4">
+      </label>
+      <button id="loadDashboardButton" class="primary-button" type="button">เปิด Dashboard</button>
+    </form>
+  </dialog>
 
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
   <script src="app.js"></script>
 </body>
 </html>
