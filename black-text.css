@@ -1,0 +1,461 @@
+/* =========================================================
+   BLACK TEXT + RESPONSIVE OVERRIDES
+   Professional Salesperson Profile Assessment System
+   ========================================================= */
+
+:root{
+  --text:#000000;
+  --muted:#000000;
+  --danger:#000000;
+}
+
+html,body{
+  color:#000000 !important;
+}
+
+/* All readable interface text is black */
+body,
+body *:not(.spinner):not(.progress-track):not(.progress-track span):not(.meter):not(.meter span){
+  color:#000000 !important;
+}
+
+/* Keep decorative backgrounds while guaranteeing black labels */
+.status-pill,
+.status-pill.ok,
+.status-pill.error,
+.step-badge,
+.brand-mark,
+.ghost-button,
+.text-button,
+.primary-button,
+.answer-option,
+.answer-option.active,
+.question-number,
+.scale-legend span,
+.selected-student,
+.selected-student.empty,
+.student-option,
+.top-item,
+.kpi,
+.advice,
+th,
+td{
+  color:#000000 !important;
+}
+
+/* Form text and placeholders */
+input,
+textarea,
+select,
+button{
+  color:#000000 !important;
+  -webkit-text-fill-color:#000000;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#000000 !important;
+  opacity:.72;
+  -webkit-text-fill-color:#000000;
+}
+
+/* Disabled controls stay readable */
+.primary-button:disabled,
+button:disabled{
+  color:#000000 !important;
+  opacity:.58;
+}
+
+/* Stronger readability */
+p,
+span,
+small,
+label,
+li,
+td,
+th{
+  font-weight:500;
+}
+
+.question-text,
+.section-head h2,
+.hero h1,
+.result-hero h1,
+.brand-copy strong,
+.selected-student strong{
+  color:#000000 !important;
+}
+
+/* =========================================================
+   RESPONSIVE — notebook / tablet / phone
+   ========================================================= */
+
+/* Large notebook / desktop */
+@media (min-width:1100px){
+  .page{
+    width:min(1180px,calc(100% - 48px));
+  }
+
+  .card{
+    padding:28px;
+  }
+}
+
+/* iPad landscape / small notebook */
+@media (min-width:769px) and (max-width:1099px){
+  .page{
+    width:calc(100% - 32px);
+    max-width:980px;
+  }
+
+  .hero{
+    padding:30px;
+    gap:20px;
+  }
+
+  .answer-scale{
+    margin-left:47px;
+    gap:7px;
+  }
+
+  .answer-option{
+    min-height:60px;
+  }
+}
+
+/* iPad portrait / tablets */
+@media (min-width:601px) and (max-width:768px){
+  .topbar{
+    padding:10px 14px;
+  }
+
+  .brand-copy strong{
+    max-width:54vw;
+    font-size:13px;
+  }
+
+  .page{
+    width:calc(100% - 24px);
+    padding-top:16px;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    padding:26px;
+    border-radius:22px;
+  }
+
+  .hero-stat{
+    width:max-content;
+  }
+
+  .card{
+    padding:20px;
+  }
+
+  .answer-scale{
+    margin-left:0;
+  }
+
+  .kpis,
+  .top3,
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+
+  .dimension-row{
+    grid-template-columns:minmax(170px,220px) 1fr 56px;
+  }
+}
+
+/* Phones */
+@media (max-width:600px){
+  body{
+    font-size:15px;
+  }
+
+  .topbar{
+    position:sticky;
+    top:0;
+    padding:9px 10px;
+    gap:8px;
+  }
+
+  .brand{
+    gap:8px;
+  }
+
+  .brand-mark{
+    width:38px;
+    height:38px;
+    flex-basis:38px;
+    border-radius:11px;
+    font-size:13px;
+  }
+
+  .brand-copy strong{
+    max-width:48vw;
+    font-size:11px;
+    line-height:1.25;
+  }
+
+  .brand-copy span{
+    font-size:9px;
+  }
+
+  .status-pill{
+    display:none !important;
+  }
+
+  .ghost-button{
+    min-height:40px;
+    padding:8px 10px;
+    font-size:12px;
+  }
+
+  .page{
+    width:calc(100% - 16px);
+    padding:10px 0 24px;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    padding:20px 17px;
+    border-radius:18px;
+    gap:14px;
+  }
+
+  .hero h1{
+    font-size:clamp(28px,9vw,38px);
+    line-height:1.12;
+  }
+
+  .hero p{
+    font-size:14px;
+    line-height:1.7;
+  }
+
+  .hero-stat{
+    display:grid;
+    width:100%;
+    grid-template-columns:auto 1fr auto 1fr;
+    padding:12px 14px;
+    gap:6px 8px;
+  }
+
+  .hero-stat b{
+    font-size:22px;
+  }
+
+  .card{
+    margin-top:12px;
+    padding:16px 14px;
+    border-radius:17px;
+  }
+
+  .section-head{
+    gap:8px;
+    margin-bottom:14px;
+  }
+
+  .section-head h2{
+    font-size:20px;
+  }
+
+  .section-head p{
+    font-size:12px;
+    line-height:1.55;
+  }
+
+  .step-badge{
+    font-size:9px;
+    padding:5px 7px;
+  }
+
+  .search-wrap input,
+  .dialog-card input{
+    min-height:48px;
+    font-size:16px;
+    padding:12px;
+  }
+
+  .selected-student{
+    align-items:flex-start;
+    padding:13px;
+  }
+
+  .student-option{
+    align-items:flex-start;
+    min-height:62px;
+  }
+
+  .scale-legend{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:6px;
+  }
+
+  .scale-legend span{
+    width:100%;
+    padding:8px 10px;
+    font-size:11px;
+  }
+
+  .progress-sticky{
+    top:57px;
+    padding:8px 0 10px;
+  }
+
+  .question{
+    padding:17px 0;
+  }
+
+  .question-top{
+    gap:9px;
+  }
+
+  .question-number{
+    width:34px;
+    height:34px;
+    flex-basis:34px;
+  }
+
+  .question-text{
+    font-size:15px;
+    line-height:1.65;
+  }
+
+  .question-dimension{
+    font-size:10px;
+  }
+
+  /* 1-5 stays in one row on phone, large enough to tap */
+  .answer-scale{
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:5px;
+    margin:12px 0 0 0;
+  }
+
+  .answer-option{
+    min-width:0;
+    min-height:52px;
+    padding:7px 3px;
+    border-radius:10px;
+  }
+
+  .answer-option b{
+    font-size:17px;
+  }
+
+  .answer-option small{
+    display:none;
+  }
+
+  .submit-zone{
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+  }
+
+  .primary-button{
+    width:100%;
+    min-height:48px;
+  }
+
+  .result-hero{
+    align-items:flex-start;
+    padding:18px;
+    border-radius:18px;
+  }
+
+  .result-icon{
+    width:58px;
+    height:58px;
+    flex-basis:58px;
+    border-radius:16px;
+    font-size:31px;
+  }
+
+  .result-hero h1{
+    font-size:25px;
+  }
+
+  .kpis,
+  .top3,
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+
+  .dimension-row{
+    grid-template-columns:1fr;
+    gap:5px;
+    padding:8px 0;
+  }
+
+  .dimension-row > b{
+    text-align:left !important;
+  }
+
+  .profile-row{
+    grid-template-columns:1fr 36px;
+  }
+
+  .profile-row .meter{
+    grid-column:1 / -1;
+  }
+
+  .table-wrap{
+    max-width:100%;
+    overflow-x:auto;
+  }
+
+  table{
+    min-width:680px;
+  }
+
+  dialog{
+    width:calc(100% - 20px) !important;
+    max-height:calc(100dvh - 20px);
+    overflow:auto;
+  }
+
+  .dialog-card{
+    padding:20px 16px;
+  }
+
+  .footer{
+    display:none;
+  }
+
+  .toast{
+    left:10px;
+    right:10px;
+    bottom:10px;
+    max-width:none;
+  }
+}
+
+/* Very small phones */
+@media (max-width:380px){
+  .page{
+    width:calc(100% - 12px);
+  }
+
+  .card{
+    padding:14px 12px;
+  }
+
+  .hero{
+    padding:18px 14px;
+  }
+
+  .hero h1{
+    font-size:27px;
+  }
+
+  .answer-option{
+    min-height:50px;
+    padding-left:1px;
+    padding-right:1px;
+  }
+}
